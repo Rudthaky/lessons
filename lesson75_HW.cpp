@@ -16,8 +16,19 @@ void strLen(const char *str)
     cout << temp << endl;
 }
 
+int StrLen(const char *str)
+{
+    int counter = 0;
+    while(str[counter] != '\0')
+    {
+        counter++;
+    }
+    return counter;
+}
+
 int main()
 {
     char *str = "Hello";
     strLen(str);
+    cout << StrLen(str) << endl;
 }
