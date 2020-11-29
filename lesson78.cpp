@@ -1,47 +1,88 @@
 #include <iostream>
 #include <string>
-
 using namespace std;
 
 /*
-*   Указатель на функцию
+*   конструктор класса с параметрами
+*   по умолчанию
 */
 
-//тип функции(*имя указателя)(спецификация параметров);
-
-/*
-*   Указатель на функцию может быть использован 
-*   В ситуациях, когда мы незнаем какие данные
-*   нам могут передавать.
-*   К примеру, в нашу функцию передают данные из сервера и БД
-*   И мы не знаем кто и когда запросит нашу функцию для
-*   вывода данных (сервер или БД)
-*/
-
-
-//функции которые будут передавать нашей функции данные
-string GetDataFromWebServer()
+class Human             //class - пользовательский тип данных
 {
-    return "Data From Web Server";
-}
-string GetDataFromBD()
-{
-    return "Data From BD";
-}
-string GetDataFromAstral()
-{
-    return "Data From Astral";
-}
+    public:             //модификатор доступа
+        int age;        //поле класса         
+        int weight;
+        string name;
 
-//наша функция обработки переданных данных (вывод)
-void ShowInfo(string (*foo)())
+        void Print()    //функция класса
+        {
+            cout << "Name " << name << "\nAge " << age << "\nWeight " << weight << endl
+                 << endl;
+        }
+};
+
+class Point
 {
-    cout << foo() << endl;
-}
+    private:             
+        int X;
+        int Y;
+        
+    public:
+    Point(int valueX, int valueY)       //конструктор
+    {   
+        X = valueX;                     //теперь компилятор не будет создавать
+        Y = valueY;                     //контрутор по умолчанию
+    }                                   //При попытки созтать класс без параметров 
+                                        //компилятор выдаст ошибку
+                                        //no default constructor exists for class "Point"
+
+        int GetX(){          //геттер
+            return X;
+        }
+
+        void SetX(int valueX){   //сеттер
+            X = valueX;
+        }
+
+        void Print(){
+            cout << "X = " << X << "\tY = " << Y << endl
+                 << endl;
+        }
+};
+
+class CoffeeGrinder
+{
+    private:
+
+    bool CheckVoltage()
+    {
+        return random()%2;
+    }
+
+    public:
+
+    void Start()
+    {
+        for (int i = 0; i < 20; i++)
+        {
+            if(CheckVoltage()){
+                cout << "VjuHHHH !!!" << endl;
+            }
+            else
+            {
+                cout << "Beep Beep" << endl;
+            }
+        }
+    }
+};
 
 int main()
 {
-    ShowInfo(GetDataFromBD);
-    ShowInfo(GetDataFromWebServer);
-    ShowInfo(GetDataFromAstral);
+    Point a(5, 44);
+    a.Print();
+
+    Point b(66, 33);
+    b.Print();
+
+    return 0;
 }
