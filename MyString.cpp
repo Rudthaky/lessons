@@ -8,11 +8,12 @@ public:
     MyString()
     {
         str = nullptr;
+        length = 0;
     }
 
-    MyString(char *str)
+    MyString(const char *str)
     {
-        int length = StrLen(str);
+        length = StrLen(str);
         this->str = new char[length + 1];
         for (int i = 0; i < length; i++)
         {
@@ -28,7 +29,7 @@ public:
 
     MyString(const MyString &other)
     {
-        int length = StrLen(other.str);
+        length = StrLen(other.str);
         this->str = new char[length + 1];
         for (int i = 0; i < length; i++)
         {
@@ -44,7 +45,7 @@ public:
             delete[] str;
         }
 
-        int length = StrLen(other.str);
+        length = StrLen(other.str);
         this->str = new char[length + 1];
         for (int i = 0; i < length; i++)
         {
@@ -59,6 +60,8 @@ public:
         MyString newstr;
         int thisLength = StrLen(this->str);
         int otherLength = StrLen(other.str);
+
+        newstr.length = thisLength + otherLength;
 
         newstr.str = new char[thisLength + otherLength + 1];
 
@@ -92,8 +95,63 @@ public:
         cout << this->str;
     }
 
+    int Length()
+    {
+        return length;
+    }
+
+    bool operator==(const MyString &other)
+    {
+        if (this->length != other.length)
+        {
+            return false;
+        }
+
+        for (int i = 0; i < this->length; i++)
+        {
+            if (this->str[i] != other.str[i])
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    bool operator!=(const MyString &other)
+    {
+        return !(this->operator==(other));
+    }
+
+    char &operator[](int index)
+    {
+        return this->str[index];
+    }
+
+    MyString(MyString &&other)
+    {
+        this->length = other.length;
+        this->str = other.str;
+
+        other.str = nullptr;
+    }
+
+    MyString &operator=(MyString &&other)
+    {
+        if (this->str != nullptr)
+        {
+            delete[] str;
+        }
+
+        this->length = other.length;
+        this->str = other.str;
+        other.str = nullptr;
+
+        return *this;
+    }
+
 private:
     char *str;
+    int length;
 };
 
 int main()
@@ -103,7 +161,22 @@ int main()
 
     MyString result;
     result = str + str2;
+    result.Print();
+    cout << endl
+         << endl;
 
-    
+    cout << str.Length() << endl;
+    cout << str2.Length() << endl;
+    cout << result.Length() << endl;
+
+    bool equal = str == str2;
+
+    str.Print();
+    cout << endl
+         << endl;
+    str[0] = 'Q';
+    str.Print();
+    cout << endl;
+
     return 0;
 }
