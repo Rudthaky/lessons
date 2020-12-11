@@ -3,19 +3,20 @@
 
 using namespace std;
 
-/*
-*   Наследование в ООП
-*/
+/**
+ * Наследование в ООП
+ * 
+ */
 
 class Human
 {
 public:
-    string GetName()
+    string GetName() //NOTE Гетер - получает имя
     {
         return name;
     }
 
-    void SetName(string name)
+    void SetName(string name) //NOTE сетер - задает имя
     {
         this->name = name;
     }
@@ -24,7 +25,7 @@ private:
     string name;
 };
 
-class Student : public Human //пример наследования от класса чедовек
+class Student : public Human //NOTE пример наследования от класса человек
 {
 public:
     string group;
@@ -35,7 +36,7 @@ public:
     }
 };
 
-class ExtramuralStudent : public Student
+class ExtramuralStudent : public Student //NOTE наследование от класса студент
 {
 public:
     void Learn()
