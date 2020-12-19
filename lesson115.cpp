@@ -10,7 +10,7 @@ using namespace std;
 
 int main()
 {
-    string path = "lesson115.txt";
+    string path = "./execute/lesson115.txt";
     ofstream fout;
 
     fout.open(path, ofstream::app);//NOTE Перегруженный метод open
