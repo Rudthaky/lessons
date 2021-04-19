@@ -46,7 +46,7 @@ int main()
     }
     catch (...)
     {
-        cout << "Any exapshon" << endl;
+        cout << "Any exception" << endl;
     }
     return 0;
 }
